@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animated Notification</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #a85c5c;
+        }
+
+        #notification-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        #notification {
+            display: none;
+            padding: 15px;
+            background-color: red;
+            color: white;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            animation: slideIn 0.5s ease-in-out;
+        }
+
+        #notification-bell-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        #notification-bell {
+            font-size: 24px;
+            color: white;
+            background-color: red;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        #notification-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: white;
+            color: red;
+            font-size: 12px;
+            padding: 4px;
+            border-radius: 50%;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(100%); }
+            to { transform: translateX(0); }
+        }
+    </style>
+</head>
+<body>
+
+<div id="notification-container">
+    <div id="notification">
+        <p>New Notification!</p>
+    </div>
+</div>
+
+<div id="notification-bell-container" onclick="showNotification()">
+    <div id="notification-bell">
+        <span id="notification-count">0</span>
+        🔔
+    </div>
+</div>
+
+<script>
+    var notificationCount = 0;
+
+    function showNotification() {
+        var notification = document.getElementById('notification');
+        notification.style.display = 'block';
+
+        // Increment notification count
+        notificationCount++;
+        updateNotificationCount();
+
+        // Play sound alarm
+        var audio = new Audio('C:\Users\admin\Desktop\Audio');
+        audio.play();
+
+        // Hide notification after 5 seconds
+        setTimeout(function () {
+            notification.style.display = 'none';
+        }, 500);
+    }
+
+    function updateNotificationCount() {
+        var notificationCountElement = document.getElementById('notification-count');
+        notificationCountElement.textContent = notificationCount;
+    }
+
+    // Example: Show the notification every 10 seconds (you can adjust this interval based on your requirements)
+    setInterval(showNotification, 1000);
+</script>
+
+</body>
+</html>
